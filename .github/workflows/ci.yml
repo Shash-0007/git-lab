@@ -2,7 +2,7 @@ name: Python CI
 
 on:
   push:
-    branches: [main, feature/grade-status, PullRequest_Test]
+    branches: [main]
   pull_request:
     branches: [main]
 
