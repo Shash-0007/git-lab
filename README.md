@@ -31,7 +31,9 @@ git-lab/
 ├── tests/
 │   └── test_grade_calculator.py
 ├── docs/
-│   └── LAB_TASKS.md
+│   ├── LAB_TASKS.md
+│   ├── PR_WORKFLOW_DEMO.md
+│   └── CHERRY_PICK_SOURCE_NOTE.md (on cherry-pick-source)
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -44,30 +46,29 @@ git-lab/
 3. Make a change, commit it, and push the feature branch.
 4. Open a Pull Request with `main` as the base branch.
 5. Review the proposed changes and verify the GitHub Actions checks.
-6. Merge after checks pass and clean up the feature branch.
+6. Merge after checks pass.
 
-Suggested branch: `feature/grade-status`.
+Completed demonstration: [PR #8](https://github.com/Shash-0007/git-lab/pull/8), from `feature/grade-status` into `main`. PR CI passed and the PR is merged. A formal teammate review has not been recorded; see `docs/LAB_TASKS.md`.
 
 ## Lab task 2: Cherry-picking
 
 Cherry-picking applies one selected commit from another branch without merging the entire branch.
 
-1. Identify the required commit hash on the source branch.
-2. Switch to the target branch and update it.
-3. Run `git cherry-pick <commit-hash>`.
-4. Resolve conflicts if Git reports any.
-5. Push the updated target branch.
+- Source branch: `cherry-pick-source`
+- Target branch: `cherry-pick-target`
+- Source commit to apply: `98cbb95d1abb47671a3ad1eb46c6c3f7b83ea5a7`
 
-Use the separate `cherry-pick-source` branch and its commit for this exercise.
+In your local clone, fetch the branches, switch to `cherry-pick-target`, run `git cherry-pick 98cbb95d1abb47671a3ad1eb46c6c3f7b83ea5a7`, and push the target branch. The target branch is prepared remotely; the local cherry-pick and push remain to be performed.
 
 ## Lab task 3: GitHub Actions CI
 
-The workflow at `.github/workflows/ci.yml` runs on pushes to `main` and on Pull Requests targeting `main`. It checks out the repository, sets up Python 3.12, installs pytest, and executes the test suite.
+The workflow at `.github/workflows/ci.yml` runs on pushes to `main` and on Pull Requests targeting `main`. It checks out the repository, sets up Python 3.12, installs dependencies from `requirements.txt`, and runs pytest.
 
-Open the **Actions** tab to inspect each run:
-- Green check: all configured steps and tests passed.
-- Red X: a step failed; open the run and inspect its logs.
-- Pull Request checks: CI results appear on the PR before merging.
+Verified successful workflow runs:
+- [Pull Request CI](https://github.com/Shash-0007/git-lab/actions/runs/41979412592)
+- [main push CI](https://github.com/Shash-0007/git-lab/actions/runs/41979483658)
+
+A green check means the configured workflow and tests passed. A red X indicates a failing step; open the run and inspect its logs. Pull Request checks appear on PRs targeting `main`.
 
 ## Grade calculator functions
 
@@ -85,3 +86,5 @@ Capture the following from GitHub:
 4. Cherry-pick commit visible in the target branch history.
 5. GitHub Actions run with a green check.
 6. Local pytest output showing all tests passed.
+
+See `docs/LAB_TASKS.md` for the current completion checklist and remaining local actions.
